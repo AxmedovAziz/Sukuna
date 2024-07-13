@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Menu</title>
+{% endblock %}
+
+{% block css %}
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        overflow-x: hidden;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: stretch;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    .left-section {
+        background-image: url('https://images2.alphacoders.com/133/thumb-1920-1335141.png');
+        background-size: cover;
+        background-position: center;
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .left-section h1 {
+        font-size: 4em;
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .right-section {
+        background-color: #111;
+        width: 60%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .menu-section {
+        margin-bottom: 40px;
+    }
+
+    .menu-section h2 {
+        border-bottom: 1px solid #444;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .menu-item img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        object-position: center;
+        margin-right: 20px;
+        border-radius: 5px;
+        transition: transform 0.3s ease, object-position 0.3s ease;
+    }
+
+    .menu-item img:hover {
+        transform: scale(1.1);
+        object-position: center top;
+    }
+
+    .menu-item .description {
+        flex: 1;
+    }
+
+    .menu-item h3 {
+        margin: 0;
+        font-size: 1.2em;
+    }
+
+    .menu-item p {
+        margin: 5px 0;
+        font-size: 0.9em;
+        color: #ccc;
+    }
+
+    .menu-item .price {
+        font-size: 1.2em;
+        margin-left: 10px;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid #444;
+    }
+
+    .footer a {
+        color: #ccc;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+
+    .button-link {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        background-color: #ffcc00;
+        color: #000;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1em;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .button-link:hover {
+        background-color: #e6b800;
+    }
+
+    /* Media Queries */
+    @media (max-width: 1200px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .left-section,
+        .right-section {
+            width: 100%;
+        }
+
+        .left-section {
+            height: 50vh;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .menu-item img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .menu-item h3 {
+            font-size: 1em;
+        }
+
+        .menu-item p {
+            font-size: 0.8em;
+        }
+
+        .menu-item .price {
+            font-size: 1em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .menu-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .menu-item h3 {
+            font-size: 1.2em;
+        }
+
+        .menu-item p {
+            font-size: 0.9em;
+        }
+
+        .menu-item .price {
+            font-size: 1.2em;
+            margin-left: 0;
+        }
+
+        .footer a {
+            display: block;
+            margin: 5px 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="left-section">
+        <h1>MENU</h1>
+    </div>
+    <div class="right-section">
+        <div class="menu-section">
+            <h2>MAKI</h2>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/736x/30/b9/67/30b967b7f06d4757516f7df3e521450f.jpg"
+                    alt="Spicy Tuna Maki">
+                <div class="description">
+                    <h3>Sukuna</h3>
+                    <p>Fresh tuna with a spicy kick, wrapped in seaweed and rice.</p>
+                </div>
+                <div class="price">$500</div>
+            </div>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/236x/f2/cf/0a/f2cf0a0fd93850611f6e9f3ad2202719.jpg" alt="Kamikaze Maki">
+                <div class="description">
+                    <h3>𝓖𝓸𝓳𝓸 𝓢𝓪𝓽𝓸𝓻𝓾</h3>
+                    <p>Salmon, avocado, and cucumber with spicy mayo.</p>
+                </div>
+                <div class="price">$500</div>
+            </div>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/736x/8c/81/3a/8c813a4c87c7b0d98ba8d9abac80e482.jpg" alt="Kamikaze Maki">
+                <div class="description">
+                    <h3>Fushiguro Toji</h3>
+                    <p>Salmon, avocado, and cucumber with spicy mayo.</p>
+                </div>
+                <div class="price">$500</div>
+            </div>
+            <!-- Add more MAKI items here -->
+        </div>
+        <div class="menu-section">
+            <h2>URAMAKI</h2>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/736x/65/29/c0/6529c065d43db385b4ecf72d490ab73c.jpg"
+                    alt="Volcano Delight">
+                <div class="description">
+                    <h3>Itadori Yuji</h3>
+                    <p>A fiery blend of crab, avocado, and spicy mayo.</p>
+                </div>
+                <div class="price">$12</div>
+            </div>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/736x/04/88/43/048843ff7e5f5906858ac4d785f226c5.jpg" alt="Rainbow Fusion">
+                <div class="description">
+                    <h3>Yuta</h3>
+                    <p>Assorted fish on a California roll base.</p>
+                </div>
+                <div class="price">$12</div>
+            </div>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/236x/8c/04/9e/8c049eb42c6f385a64e2e58ecf4d52f1.jpg" alt="Rainbow Fusion">
+                <div class="description">
+                    <h3>Yuta</h3>
+                    <p>Assorted fish on a California roll base.</p>
+                </div>
+                <div class="price">$12</div>
+            </div>
+            <!-- Add more URAMAKI items here -->
+        </div>
+        <div class="menu-section">
+            <h2>SPECIAL ROLLS</h2>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/474x/8f/86/d2/8f86d20566a2126dd5496d0a737b3a9f.jpg" alt="Sunrise Bliss">
+                <div class="description">
+                    <h3>Mahito</h3>
+                    <p>Unagi, avocado, and tamago with a sweet sauce.</p>
+                </div>
+                <div class="price">$16</div>
+            </div>
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/564x/25/99/12/259912456927ef6ad2e402f2a64642d4.jpg"
+                    alt="Mango Tango Fusion">
+                <div class="description">
+                    <h3>Kenjaku</h3>
+                    <p>Mango, shrimp tempura, and spicy mayo.</p>
+                </div>
+                <div class="price">$16</div>
+            </div>
+            <!-- Add more SPECIAL ROLLS items here -->
+        </div>
+        <div class="footer">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+        <a href="{% url 'create_menu'%}" class="button-link">Create new </a>
+        <div>
+            hello world
+            {{menu}}
+        </div>
+    </div>
+</div>
+{% endblock %}

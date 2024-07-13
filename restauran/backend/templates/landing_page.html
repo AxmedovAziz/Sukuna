@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Home</title>
+{% endblock %}
+
+{% block css %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #000;
+        color: #e0d4b7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu a {
+        text-decoration: none;
+        color: #e0d4b7;
+        font-size: 2rem;
+        margin: 10px 0;
+        transition: color 0.3s;
+    }
+
+    .menu a:hover {
+        color: #fff;
+    }
+
+    /* Media Queries for Responsiveness */
+
+    @media (max-width: 768px) {
+        .menu a {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .menu a {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="menu">
+        <a href="{% url 'menu_page' %}">MENU</a>
+        <a href="% url 'reservation' %">RESERVATION</a>
+        <a href="{% url 'about' %}">ABOUT</a>
+        <a href="{% url 'contact' %}">CONTACT</a>
+        <a href="#blog">BLOG</a>
+    </div>
+</div>
+{% endblock %}

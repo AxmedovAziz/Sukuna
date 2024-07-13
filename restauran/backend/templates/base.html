@@ -1,0 +1,41 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {%block title %}
+    <title>Restauran | Wordwide</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'navbar/style.css' %}">
+
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+    {% include "navbar.html" %}
+
+    {% block contact %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block menu_page %}
+    {% endblock %}
+
+    {% block about %}
+    {% endblock %}
+
+    {% block reservation %}
+    {% endblock %}
+
+</body>
+
+</html>
