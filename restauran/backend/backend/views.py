@@ -15,6 +15,14 @@ def contact(request):
 
 
 def menu_page(request):
-    menu = Menu.objects.all()
-    context = {"menu": menu}
+    menues = Menu.objects.all()
+    price_less_than = Menu.price_less_than(50)
+    with_meat = Menu.with_meat()
+
+    context = {
+        "menues": menues,
+        "price_less_than": price_less_than,
+        "with_meat": with_meat,
+        "wishlist": request.session.get("favorites", []),
+    }
     return render(request, "menu_page.html", context)
