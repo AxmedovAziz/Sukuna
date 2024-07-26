@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% load static %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block css %}
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        background-color: #000;
+    }
+
+    .container {
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        background-image: url('https://i.pinimg.com/originals/b6/b9/db/b6b9db5845b3b88c9d0d86b83f649197.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .auth-card {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .auth-card h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #ffcc00;
+    }
+
+    .auth-card form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .auth-card input {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #333;
+        color: #fff;
+        box-sizing: border-box;
+        font-size: 1em;
+    }
+
+    .auth-card button {
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ffcc00;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .auth-card button:hover {
+        background-color: #e6b800;
+    }
+
+    .auth-card p {
+        margin-top: 20px;
+        font-size: 1em;
+    }
+
+    .auth-card a {
+        color: #ffcc00;
+        text-decoration: none;
+    }
+
+    .auth-card a:hover {
+        text-decoration: underline;
+    }
+
+    .social-login {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .social-login a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #333;
+        transition: background-color 0.3s;
+    }
+
+    .social-login a img {
+        margin-right: 10px;
+    }
+
+    .social-login a:hover {
+        background-color: #444;
+    }
+
+    @media (max-width: 768px) {
+        .auth-card {
+            padding: 20px;
+        }
+
+        .auth-card h1 {
+            font-size: 2em;
+        }
+
+        .auth-card input,
+        .auth-card button,
+        .social-login a {
+            padding: 12px;
+        }
+    }
+
+    .error-list {
+        color: red;
+        margin-top: 0.5em;
+    }
+
+    .error {
+        font-size: 0.875em;
+        margin: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-card">
+        <h1>Login</h1>
+        <form method="post" action="{% url 'account_login' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Email field -->
+            <div class="form-group">
+                {{ form.login }}
+                {% if form.login.errors %}
+                <div class="error-list">
+                    {% for error in form.login.errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Password field -->
+            <div class="form-group">
+                {{ form.password }}
+                {% if form.password.errors %}
+                <div class="error-list">
+                    {% for error in form.password.errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Form-wide Errors -->
+            {% if form.non_field_errors %}
+            <div class="error-list">
+                {% for error in form.non_field_errors %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <button type="submit">Login</button>
+        </form>
+        <p>or</p>
+        <div class="social-login">
+            <a href="{% provider_login_url 'google' %}">
+                <img src="{% static 'images/icons/google.png' %}" width="20" height="20">
+                Login with Google
+            </a>
+            <a href="{% provider_login_url 'github' %}">
+                <img src="{% static 'images/icons/github.png' %}" width="20" height="20">
+                Login with GitHub
+            </a>
+
+            <a href="{% provider_login_url 'facebook' %}">
+                <img src="{% static 'images/icons/github.png' %}" width="20" height="20">
+                Login with Facebook
+            </a>
+        </div>
+        <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></p>
+    </div>
+</div>
+{% endblock %}

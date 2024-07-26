@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Menu</title>{% endblock %}
+
+{% block css %}
+<style>
+    * {
+        transition: ease-in 0.2s;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        overflow-x: hidden;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: stretch;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    .left-section {
+        background: url('https://images2.alphacoders.com/133/thumb-1920-1335141.png') center/cover;
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .left-section h1 {
+        font-size: 4em;
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .right-section {
+        background-color: #111;
+        width: 60%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .menu-section {
+        margin-bottom: 40px;
+    }
+
+    .menu-section h2 {
+        border-bottom: 1px solid #444;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .menu-item img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        margin-right: 20px;
+        border-radius: 5px;
+        transition: transform 0.3s, object-position 0.3s;
+    }
+
+    .menu-item img:hover {
+        transform: scale(1.1);
+        object-position: center top;
+    }
+
+    .description {
+        flex: 1;
+    }
+
+    .menu-item h3 {
+        margin: 0;
+        font-size: 1.2em;
+    }
+
+    .menu-item p {
+        margin: 5px 0;
+        font-size: 0.9em;
+        color: #ccc;
+    }
+
+    .price {
+        font-size: 1.2em;
+        margin-left: 10px;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid #444;
+    }
+
+    .footer a {
+        color: #ccc;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+
+    .button-link {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        background-color: #ffcc00;
+        color: #000;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1em;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .button-link:hover {
+        background-color: #e6b800;
+    }
+
+    .wishlist-button {
+        background-color: transparent;
+        color: #ffcc00;
+        border: 1px solid #ffcc00;
+        padding: 9px 14px;
+        border-radius: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-size: 0.9em;
+    }
+
+    .wishlist-button:hover {
+        color: black;
+        background-color: #e6b800;
+    }
+
+    .wishlist-button.remove {
+        background-color: transparent;
+        color: #fc2323;
+        border: 1px solid #ff3333;
+    }
+
+    .wishlist-button.remove:hover {
+        color: white;
+        background-color: #fc2323;
+        border: none;
+    }
+
+    @media (max-width: 1200px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .left-section,
+        .right-section {
+            width: 100%;
+        }
+
+        .left-section {
+            height: 50vh;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .menu-item img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .menu-item h3 {
+            font-size: 1em;
+        }
+
+        .menu-item p {
+            font-size: 0.8em;
+        }
+
+        .price {
+            font-size: 1em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .menu-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .menu-item h3,
+        .price {
+            font-size: 1.2em;
+        }
+
+        .menu-item p {
+            font-size: 0.9em;
+        }
+
+        .footer a {
+            display: block;
+            margin: 5px 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="left-section">
+        <h1>MENU</h1>
+    </div>
+    <div class="right-section">
+        {% include 'partials/_menu_item.html' with menues=menues wishlist=wishlist header="All the Menues" %}
+        {% include 'partials/_menu_item.html' with menues=with_meat wishlist=wishlist header="With Meat" %}
+        {% include 'partials/_menu_item.html' with menues=price_less_than wishlist=wishlist header="Lower" %}
+
+        <div class="footer">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+        <a href="{% url 'create_menu' %}" class="button-link">Create new</a>
+    </div>
+</div>
+{% endblock %}

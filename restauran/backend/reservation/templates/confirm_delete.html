@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Confirm Delete</title>
+{% endblock %}
+
+{% block css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        color: #fff;
+        background-color: #000;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin-top: 60px;
+    }
+
+    .confirm-container {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .confirm-container h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .button-group button,
+    .button-group a {
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        flex: 1;
+    }
+
+    .button-group .delete-button {
+        background-color: #d9534f;
+        color: white;
+        cursor: pointer;
+    }
+
+    .button-group .cancel-button {
+        background-color: #ffcc00;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        display: inline-block;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+        .confirm-container h2 {
+            font-size: 1.2em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .confirm-container h2 {
+            font-size: 1em;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+        .button-group button,
+        .button-group a {
+            padding: 10px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="confirm-container">
+        <h2>Are you sure you want to delete the reservation for {{ reservation.name }}?</h2>
+        <form method="post" class="button-group">
+            {% csrf_token %}
+            <button type="submit" class="delete-button">Yes, delete</button>
+            <a href="{% url 'blog' %}" class="cancel-button">Cancel</a>
+        </form>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Contact</title>
+{% endblock %}
+
+{% block css %}
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #111;
+        color: #fff;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .main-image {
+        position: relative;
+        width: 60%;
+        height: 100%;
+        background-color: black;
+    }
+
+    .main-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .overlay-text {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 3vw;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .content {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        background-color: #222;
+        overflow-y: auto;
+    }
+
+    .opening-hours,
+    .contact {
+        background-color: #333;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+    .opening-hours h2,
+    .contact h2 {
+        margin: 0;
+        font-size: 1.5em;
+        border-bottom: 2px solid #444;
+        padding-bottom: 10px;
+    }
+
+    .opening-hours ul,
+    .contact p {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .opening-hours li {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid #444;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .gallery img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .gallery .full-width {
+        grid-column: span 2;
+    }
+
+    .contact a,
+    .social a {
+        color: #bbb;
+        text-decoration: none;
+    }
+
+    .social a {
+        margin-right: 10px;
+        color: #bbb;
+    }
+
+    .map iframe {
+        width: 100%;
+        border-radius: 10px;
+        border: none;
+    }
+
+    @media (max-width: 1024px) {
+        .overlay-text {
+            font-size: 4vw;
+        }
+
+        .gallery {
+            grid-template-columns: 1fr;
+        }
+
+        .gallery .full-width {
+            grid-column: span 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 50%;
+        }
+
+        .content {
+            width: 100%;
+            height: 50%;
+        }
+
+        .gallery img {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .overlay-text {
+            font-size: 6vw;
+        }
+
+        .gallery img {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="main-image">
+        <img src="https://i.pinimg.com/564x/6d/db/08/6ddb08c9c58dfbef2a159140dd7040c2.jpg" alt="Main Image">
+        <div class="overlay-text">Contact</div>
+    </div>
+    <div class="content">
+        <div class="opening-hours">
+            <h2>Opening Hours</h2>
+            <ul>
+                <li>Monday: 9am - 5pm</li>
+                <li>Tuesday: 9am - 5pm</li>
+                <li>Wednesday: 9am - 5pm</li>
+                <li>Thursday: 9am - 5pm</li>
+                <li>Friday: 9am - 5pm</li>
+                <li>Saturday: 10am - 4pm</li>
+                <li>Sunday: Closed</li>
+            </ul>
+        </div>
+        <div class="gallery">
+            <img src="https://i.pinimg.com/236x/31/a0/27/31a0279cb3f3c7175be4fd14cdc757b3.jpg" class="full-width"
+                alt="Image 1">
+            <img src="https://i.pinimg.com/236x/a2/f0/a5/a2f0a52e33d2d0215d32fed117a0a5aa.jpg" alt="Image 2">
+            <img src="https://i.pinimg.com/564x/20/b1/cc/20b1cc2d209103ae849cd9d5dd38d23f.jpg" alt="Image 3">
+            <img src="https://i.pinimg.com/236x/a6/6c/5f/a66c5fe86f52488b0313a5d4c3ac8683.jpg" class="full-width"
+                alt="Image 4">
+        </div>
+        <div class="contact">
+            <h2>Contact Us</h2>
+            <p>Phone: (123) 456-7890</p>
+            <p>Email: info@example.com</p>
+            <div class="social">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.3982254599274!2d-73.86656202458773!3d40.73628414218427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2604856af50c7%3A0x70eb5b12964b1eb4!2s98-25%20Horace%20Harding%20Expy%2C%20Queens%2C%20NY%2011375%2C%20USA!5e0!3m2!1sen!2s!4v1596380211358!5m2!1sen!2s"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

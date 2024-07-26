@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Update Reservation</title>
+{% endblock %}
+
+{% block css %}
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        color: #fff;
+        background-color: #000;
+    }
+
+    .menu-icon {
+        display: none;
+        font-size: 2em;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin-top: 60px;
+    }
+
+    .form-container {
+        width: 80%;
+        max-width: 600px;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .form-container h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    input,
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    input {
+        background-color: #333;
+        color: #fff;
+        width: 100%;
+    }
+
+    button {
+        background-color: #ffcc00;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .button-group button {
+        flex: 1;
+    }
+
+    @media (max-width: 768px) {
+        .form-container h2 {
+            font-size: 1.5em;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .form-container h2 {
+            font-size: 1.2em;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+        button {
+            padding: 10px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="form-container">
+        <h2>Update Reservation</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                {{ form.name }}
+
+            </div>
+            <div class="form-row">
+                {{ form.phone_number }}
+
+            </div>
+            <div class="form-row">
+                {{ form.email }}
+
+            </div>
+            <div class="form-row inline-fields">
+                <div>{{ form.guests }}</div>
+                <div>{{ form.date }}</div>
+                <div>{{ form.time }}</div>
+            </div>
+            <div class="button-group">
+                <button type="submit" name="update">Update</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
