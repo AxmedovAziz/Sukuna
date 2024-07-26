@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %} <!-- Load socialaccount template tags -->
+
+{% block title %}
+<title>Sign Up</title>
+{% endblock %}
+
+{% block css %}
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        background-color: #000;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-image: url('https://i.pinimg.com/564x/16/c0/55/16c055d9dc975a4269a18ee0535f552e.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .auth-card {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .auth-card h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #ffcc00;
+    }
+
+    .auth-card form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .auth-card input {
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #333;
+        color: #fff;
+        box-sizing: border-box;
+        font-size: 1em;
+    }
+
+    .auth-card button {
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ffcc00;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .auth-card button:hover {
+        background-color: #e6b800;
+    }
+
+    .auth-card p {
+        margin-top: 20px;
+        font-size: 1em;
+    }
+
+    .auth-card a {
+        color: #ffcc00;
+        text-decoration: none;
+    }
+
+    .auth-card a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .auth-card {
+            padding: 20px;
+        }
+
+        .auth-card h1 {
+            font-size: 2em;
+        }
+
+        .auth-card input,
+        .auth-card button {
+            padding: 12px;
+        }
+    }
+
+    .error-list {
+        color: red;
+        margin-top: 0.5em;
+    }
+
+    .error {
+        font-size: 0.875em;
+        margin: 0;
+    }
+
+    .social-login {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .social-login a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #ffcc00;
+        background-color: #333;
+        transition: background-color 0.3s;
+    }
+
+    .social-login a img {
+        margin-right: 10px;
+    }
+
+    .social-login a:hover {
+        background-color: #444;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-card">
+        <h1>Sign up</h1>
+
+        <form method="post" action="{% url 'account_signup' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Username Field -->
+            <div class="form-group">
+                <!-- {{ form.username.label_tag }} -->
+                {{ form.username }}
+                {% if form.username.errors %}
+                <div class="error-list">
+                    {% for error in form.username.errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <!-- {{ form.email.label_tag }} -->
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="error-list">
+                    {% for error in form.email.errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <!-- {{ form.password1.label_tag }} -->
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                <div class="error-list">
+                    {% for error in form.password1.errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Password Confirmation Field -->
+            <div class="form-group">
+                <!-- {{ form.password2.label_tag }} -->
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                <div class="error-list">
+                    {% for error in form.password2.errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Form-wide Errors -->
+            {% if form.non_field_errors %}
+            <div class="error-list">
+                {% for error in form.non_field_errors %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <button type="submit">Sign up</button>
+            <p>Already have an account? <a href="{% url 'account_login' %}">Login</a></p>
+            <div class="social-login">
+                <a href="{% provider_login_url 'google' %}">
+                    <img src="{% static 'images/icons/google.png' %}" width="20" height="20" alt="Google logo">
+                    Sign up with Google
+                </a>
+                <a href="{% provider_login_url 'github' %}">
+                    <img src="{% static 'images/icons/github.png' %}" width="20" height="20" alt="GitHub logo">
+                    Sign up with GitHub
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

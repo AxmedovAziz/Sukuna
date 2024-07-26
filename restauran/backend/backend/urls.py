@@ -13,4 +13,13 @@ urlpatterns = [
     path("reser/", include("reservation.urls")),
     path("menu-cr/", include("menu.urls")),
     path("admin/", admin.site.urls),
+    path("accounts/", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+LOGIN_REDIRECT_URL = "landing_page"
+LOGIN_URL = "account_login"
+LOGOUT_URL = "account_logout"
+SIGNUP_REDIRECT_URL = "landing_page"
+SIGNUP_URL = "account_signup"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+ACCOUNT_EMAIL_VERIFICATION = "none"

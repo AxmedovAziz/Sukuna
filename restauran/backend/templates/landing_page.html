@@ -10,7 +10,12 @@
         margin: 0;
         padding: 0;
         font-family: 'Arial', sans-serif;
-        background-color: #000;
+        background-image: url('https://images3.alphacoders.com/135/thumb-1920-1354206.jpeg');
+        background-blend-mode: darken;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        /* background-color: black; */
         color: #e0d4b7;
         display: flex;
         justify-content: center;
@@ -65,6 +70,11 @@
         <a href="{% url 'about' %}">ABOUT</a>
         <a href="{% url 'contact' %}">CONTACT</a>
         <a href="#blog">BLOG</a>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'account_logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'account_login' %}">Login</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
