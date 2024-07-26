@@ -5,4 +5,4 @@
 # Uncomment if you use environment variables for configuration
 
 
-./env
+../env
