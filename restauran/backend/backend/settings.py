@@ -157,5 +157,11 @@ LOGIN_URL = "account_login"
 LOGOUT_URL = "account_logout"
 SIGNUP_REDIRECT_URL = "landing_page"
 SIGNUP_URL = "account_signup"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_POST = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "aziz9259658@gmail.com"
+EMAIL_HOST_PASSWORD = "enter your password"
