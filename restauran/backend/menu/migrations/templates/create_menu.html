@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 <title>Create Menu</title>
@@ -13,18 +14,31 @@
     }
 
     body {
+        height: 100vh;
+        /* Ensure body takes full viewport height */
+        background-blend-mode: darken;
+        background-image: url("{% static 'images/background_weppage/thumb-1920-2499.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         font-family: 'Helvetica Neue', Arial, sans-serif;
         color: #fff;
-        background-color: #000;
         line-height: 1.6;
+        overflow: hidden;
+        /* Prevent scrolling */
     }
 
     main {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 60px;
+        justify-content: center;
+        /* Center vertically */
+        height: 100%;
+        /* Use full viewport height */
         padding: 20px;
+        overflow: auto;
+        /* Allow internal scrolling if necessary */
     }
 
     .form-container {
@@ -34,6 +48,8 @@
         background: rgba(0, 0, 0, 0.8);
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         border-radius: 10px;
+        overflow: hidden;
+        /* Hide overflow within container */
     }
 
     form {
@@ -75,9 +91,8 @@
         transition: background-color 0.3s;
     }
 
-
     .custom-file-upload:hover,
-    button {
+    button:hover {
         background-color: #e6b800;
     }
 
@@ -142,6 +157,7 @@
         }
     }
 </style>
+
 {% endblock %}
 
 {% block content %}

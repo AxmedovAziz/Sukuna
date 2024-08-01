@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 <title>Book a Table</title>
@@ -13,9 +14,15 @@
     }
 
     body {
+        background-image: url("{% static 'images/background_weppage/1317019.png' %}");
+        background-blend-mode: darken;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
         font-family: Arial, sans-serif;
         color: #fff;
-        background-color: #000;
+        overflow: hidden;
+        /* Prevent scrolling */
     }
 
     .menu-icon {
@@ -30,35 +37,8 @@
     main {
         display: flex;
         height: 100vh;
-        margin-top: 60px;
-    }
-
-    .left-section,
-    .right-section {
-        width: 50%;
-        height: 100%;
-        position: relative;
-    }
-
-    .left-section .background-image {
-        background-image: url('https://i.pinimg.com/564x/39/38/58/39385833421d321be8dfc677389a69d9.jpg');
-        background-size: cover;
-        background-position: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .left-section .overlay {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        color: #fff;
-        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .left-section .overlay h1 {
-        font-size: 3em;
-        line-height: 1.2;
+        align-items: center;
+        justify-content: center;
     }
 
     .right-section {
@@ -66,11 +46,14 @@
         align-items: center;
         justify-content: center;
         background-color: rgba(0, 0, 0, 0.8);
+        width: 80%;
+        max-width: 600px;
+        padding: 20px;
+        border-radius: 10px;
     }
 
     .reservation {
-        width: 80%;
-        max-width: 400px;
+        width: 100%;
         text-align: center;
     }
 
@@ -131,17 +114,7 @@
             flex-direction: column;
         }
 
-        .left-section,
         .right-section {
-            width: 100%;
-            height: 50vh;
-        }
-
-        .left-section .overlay h1 {
-            font-size: 2.5em;
-        }
-
-        .reservation {
             width: 90%;
         }
     }
@@ -155,24 +128,17 @@
             display: block;
         }
 
-        .left-section .overlay h1 {
-            font-size: 2em;
+        .right-section {
+            width: 100%;
+            padding: 15px;
+        }
+
+        .reservation h2 {
+            font-size: 1.8em;
         }
     }
 
     @media (max-width: 480px) {
-        .left-section {
-            background-image: url('https://i.pinimg.com/564x/39/38/58/39385833421d321be8dfc677389a69d9.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-        }
-
-        .left-section .background-image,
-        .left-section .overlay {
-            display: none;
-        }
-
         .right-section {
             width: 100%;
             height: auto;
@@ -196,16 +162,12 @@
         }
     }
 </style>
+
+
 {% endblock %}
 
 {% block reservation %}
 <main>
-    <section class="left-section">
-        <div class="background-image"></div>
-        <div class="overlay">
-            <h1>BOOK<br>A TABLE</h1>
-        </div>
-    </section>
     <section class="right-section">
         <div class="reservation">
             <h2>RESERVATION</h2>

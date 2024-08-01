@@ -27,6 +27,12 @@ class ReservationForm(forms.ModelForm):
             ),
         }
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+        super(ReservationForm, self).__init__(*args, **kwargs)
+        if user:
+            self.fields["name"].initial = user.username
+
 
 class UpdateReservation(forms.ModelForm):
     class Meta:
