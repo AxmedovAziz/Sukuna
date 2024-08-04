@@ -3,7 +3,7 @@ from .views import *
 
 urlpatterns = [
     path("", reservation_view, name="reservation"),
-    path("/blog", blog, name="blog"),
+    path("blog", blog, name="blog"),
     path(
         "update-reservation/<int:pk>/",
         update_reservation_view,

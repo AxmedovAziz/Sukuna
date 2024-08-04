@@ -1,7 +1,11 @@
 from django.db import models
 from django.db.models import Q
+from datetime import datetime
+
 
 # Create your models here.
+def get_current_time():
+    return datetime.now().time()
 
 
 class Menu(models.Model):
@@ -9,7 +13,7 @@ class Menu(models.Model):
     image = models.ImageField(upload_to="menu_images/")
     price = models.DecimalField(max_digits=10, decimal_places=2)
     ingredients = models.TextField()
-    time = models.TimeField()  # Add this line for the time field
+    time = models.TimeField(default=get_current_time)
 
     def __str__(self):
         return self.name

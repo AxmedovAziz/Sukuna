@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-image: url("{% static 'images/background_weppage/thumb-1920-1262882.jpg' %}");
+    background-blend-mode: darken;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .profile-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  .profile-image-container {
+    position: relative;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .profile-image-container img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffcc00;
+    margin-bottom: 10px;
+  }
+
+  .file-input-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .file-input-container button {
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .file-input-container button:hover {
+    background-color: #e6b800;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input,
+  button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+
+  input {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+  }
+
+  button {
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    padding: 15px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  form a {
+    color: #ffcc00;
+    text-decoration: none;
+  }
+
+  form a:hover {
+    text-decoration: underline;
+  }
+
+  button:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 992px) {
+    .profile-section {
+      width: 70%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .profile-section {
+      width: 85%;
+      padding: 15px;
+    }
+
+    .profile-container h2 {
+      font-size: 1.8em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .profile-section {
+      width: 95%;
+      height: auto;
+      padding: 20px;
+    }
+
+    .profile-container h2 {
+      font-size: 1.6em;
+    }
+  }
+</style>
+{% endblock %}
+{% block content %}
+<main>
+  <div class="profile-section">
+    <div class="profile-container">
+      <h2>Profile</h2>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="profile-image-container">
+          <img id="profile-image-preview"
+            src="{% if p_form.instance.image and p_form.instance.image.url %}{{ p_form.instance.image.url }}{% else %}{% static 'default-profile.png' %}{% endif %}"
+            alt="Profile Image">
+          <div class="file-input-container" id="file-input-container">
+            <button type="button" id="choose-file-button">Choose from Files</button>
+            <button type="button" id="remove-photo-button">Remove Photo</button>
+          </div>
+          <input id="file-upload" type="file" accept="image/*">
+        </div>
+        <p>{{ current_user }}</p>
+        <div class="form-group">
+          {{ p_form.title }}
+        </div>
+        <div class="form-group">
+          {{ p_form.information }}
+        </div>
+        <button type="submit">Update Profile</button>
+        <a href="{% url 'account_change_password' %}">Change Password</a> |
+        <a href="{% url 'account_email' %}">Change Email</a>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const fileInput = document.querySelector('#file-upload');
+    const imagePreview = document.getElementById('profile-image-preview');
+    const fileInputContainer = document.getElementById('file-input-container');
+    const chooseFileButton = document.getElementById('choose-file-button');
+    const removePhotoButton = document.getElementById('remove-photo-button');
+
+    document.querySelector('.profile-image-container').addEventListener('click', function (event) {
+      event.stopPropagation(); // Prevents the click event from propagating to the document
+      fileInputContainer.style.display = 'flex';
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!fileInputContainer.contains(event.target) && !event.target.matches('.profile-image-container img')) {
+        fileInputContainer.style.display = 'none';
+      }
+    });
+
+    chooseFileButton.addEventListener('click', function () {
+      fileInput.click();
+    });
+
+    removePhotoButton.addEventListener('click', function () {
+      fileInputContainer.style.display = 'none';
+      imagePreview.src = "{% static 'default-profile.png' %}";
+      fileInput.value = '';
+    });
+
+    fileInput.addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+      fileInputContainer.style.display = 'none';
+    });
+  });
+
+</script>
+{% endblock %}

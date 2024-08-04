@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "menu",
     "reservation",
+    "user",
     "django.contrib.sites",
     "allauth",
     "allauth.account",
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.github",
 ]
+ALLOWED_HOSTS = ["192.168.1.102", "localhost", "127.0.0.1"]
 
 SITE_ID = 1
 
@@ -85,7 +87,7 @@ ROOT_URLCONF = "backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

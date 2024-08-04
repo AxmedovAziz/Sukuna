@@ -13,6 +13,7 @@ urlpatterns = [
     path("menu-cr/", include("menu.urls")),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
+    path("create_profile/", include("user.urls")),
     # path("accounts/google/login/", GoogleLoginView.as_view(), name="google_login"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

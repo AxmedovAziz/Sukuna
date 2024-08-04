@@ -6,6 +6,7 @@
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'menu_page' %}">Menu</a></li>
             <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'profile' %}">Profile</a></li>
             {% if request.user.is_authenticated %}
             <li><a href="{% url 'reservation' %}">Reservation</a></li>
             <a href="{% url 'account_logout' %}">Logout</a>
@@ -18,11 +19,17 @@
 </header>
 <div class="mobile-nav" id="mobile-nav">
     <ul>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Feedbacks</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'menu_page' %}">Menu</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'reservation' %}">Reservation</a></li>
+        <a href="{% url 'account_logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'account_login' %}">Login</a>
+        {% endif %}
     </ul>
 </div>
 <script>
