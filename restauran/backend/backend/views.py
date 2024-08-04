@@ -1,5 +1,14 @@
-from django.shortcuts import render, redirect
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.views import OAuth2LoginView
+from django.shortcuts import render
 from menu.models import Menu
+
+
+class GoogleLoginView(OAuth2LoginView):
+    adapter_class = GoogleOAuth2Adapter
+
+    def get_template_names(self):
+        return ["google_login.html"]
 
 
 def landing_page(request):

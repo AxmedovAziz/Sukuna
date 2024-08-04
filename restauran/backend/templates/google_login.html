@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Continue{% endblock %}
+
+{% block content %}
+<h2>You are about to sign in using a third-party account from Google.</h2>
+<form method="post" action="{% url 'socialaccount_connections' %}">
+    {% csrf_token %}
+    <button type="submit">Continue</button>
+</form>
+<h1>fuck you</h1>
+{% endblock %}

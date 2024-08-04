@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import landing_page, about, contact, menu_page  # Import specific views
-
+from .views import landing_page, about, contact, menu_page, GoogleLoginView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -14,6 +13,7 @@ urlpatterns = [
     path("menu-cr/", include("menu.urls")),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
+    # path("accounts/google/login/", GoogleLoginView.as_view(), name="google_login"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 LOGIN_REDIRECT_URL = "landing_page"
