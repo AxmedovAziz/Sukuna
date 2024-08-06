@@ -8,27 +8,42 @@
         <h2>{{ request.user.username }}<br /><span>{{ request.user.profile.title }}</span></h2>
         <ul>
             <li>
-                <i class="far fa-user-circle"></i>
+                <i class="far fa-user-circle">
+
+                    <img class="icon" src="{% static 'images/icons/profile.png'%}" alt="">
+                </i>
                 <a href="#">My Profile</a>
             </li>
             <li>
-                <i class="far fa-edit"></i>
+                <i class="far fa-user-circle">
+                    <img class="icon" src="{% static 'images/icons/edit-profile.png'%}" alt="">
+                </i>
                 <a href="{% url 'profile' %}">Edit Profile</a>
             </li>
             <li>
-                <i class="far fa-envelope"></i>
+                <i class="far fa-envelope">
+                    <img class="icon" src="{% static 'images/icons/mail.png'%}" alt="">
+
+                </i>
                 <a href="#">Inbox</a>
             </li>
             <li>
-                <i class="fas fa-user-cog"></i>
+                <i class="far fa-user-circle">
+                    <img class="icon" src="{% static 'images/icons/settings.png'%}" alt="">
+                </i>
                 <a href="#">Settings</a>
             </li>
             <li>
-                <i class="far fa-question-circle"></i>
+                <i class="far fa-user-circle">
+                    <img class="icon" src="{% static 'images/icons/help.png'%}" alt="">
+                </i>
                 <a href="#">Help</a>
             </li>
             <li>
-                <i class="far fa-envelope"></i>
+                <i class="far fa-user-circle">
+
+                    <img class="icon" src="{% static 'images/icons/logout.png'%}" alt="">
+                </i>
                 <a href="{% url 'account_logout' %}">Logout</a>
             </li>
         </ul>
@@ -69,6 +84,15 @@
         border-radius: 50%;
         object-fit: cover;
         border: 2px solid #ffcc00;
+    }
+
+    .icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+        border-radius: 100%;
+        background-color: #ffcc00;
+        /* border: 1px solid black; */
     }
 
     .action .menu {
