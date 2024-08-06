@@ -5,5 +5,4 @@ from .models import Profile
 
 @receiver(user_logged_in)
 def create_profile_on_login(sender, request, user, **kwargs):
-    # Create a profile if it does not exist
     Profile.objects.get_or_create(user=user)

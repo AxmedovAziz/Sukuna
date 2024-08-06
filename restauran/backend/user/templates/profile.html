@@ -189,14 +189,12 @@
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="profile-image-container">
-          <img id="profile-image-preview"
-            src="{% if p_form.instance.image and p_form.instance.image.url %}{{ p_form.instance.image.url }}{% else %}{% static 'default-profile.png' %}{% endif %}"
-            alt="Profile Image">
+          <img id="profile-image-preview" src="{{ p_form.instance.image.url }}" alt="Profile Image">
           <div class="file-input-container" id="file-input-container">
             <button type="button" id="choose-file-button">Choose from Files</button>
             <button type="button" id="remove-photo-button">Remove Photo</button>
           </div>
-          <input id="file-upload" type="file" accept="image/*">
+          <input id="file-upload" type="file" name="image" accept="image/*">
         </div>
         <p>{{ current_user }}</p>
         <div class="form-group">
@@ -222,7 +220,7 @@
     const removePhotoButton = document.getElementById('remove-photo-button');
 
     document.querySelector('.profile-image-container').addEventListener('click', function (event) {
-      event.stopPropagation(); // Prevents the click event from propagating to the document
+      event.stopPropagation();
       fileInputContainer.style.display = 'flex';
     });
 
@@ -254,6 +252,5 @@
       fileInputContainer.style.display = 'none';
     });
   });
-
 </script>
 {% endblock %}

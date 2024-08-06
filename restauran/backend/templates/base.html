@@ -12,7 +12,7 @@
     {%block title %}
     <title>Restauran | Wordwide</title>
     {% endblock %}
-    <link rel="stylesheet" href="{% static 'navbar/style.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'navbar/style.css' %}"> -->
 
     {% block css %}
     {% endblock %}
@@ -20,6 +20,9 @@
 
 <body>
     {% include "navbar.html" %}
+    {% if request.user.is_authenticated %}
+    {% include "user_icon.html" %}
+    {% endif %}
 
     {% block contact %}
     {% endblock %}
@@ -37,5 +40,10 @@
     {% endblock %}
 
 </body>
+<style>
+    body {
+        position: relative;
+    }
+</style>
 
 </html>

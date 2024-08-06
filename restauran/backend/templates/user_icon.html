@@ -1,0 +1,166 @@
+{% load static %}
+<div class="action">
+    <div class="profile">
+        <img src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{% else %}{% static 'default-profile.png' %}{% endif %}"
+            alt="profile-img">
+    </div>
+    <div class="menu">
+        <h2>{{ request.user.username }}<br /><span>{{ request.user.profile.title }}</span></h2>
+        <ul>
+            <li>
+                <i class="far fa-user-circle"></i>
+                <a href="#">My Profile</a>
+            </li>
+            <li>
+                <i class="far fa-edit"></i>
+                <a href="{% url 'profile' %}">Edit Profile</a>
+            </li>
+            <li>
+                <i class="far fa-envelope"></i>
+                <a href="#">Inbox</a>
+            </li>
+            <li>
+                <i class="fas fa-user-cog"></i>
+                <a href="#">Settings</a>
+            </li>
+            <li>
+                <i class="far fa-question-circle"></i>
+                <a href="#">Help</a>
+            </li>
+            <li>
+                <i class="far fa-envelope"></i>
+                <a href="{% url 'account_logout' %}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .action {
+        position: fixed;
+        z-index: 15;
+        top: 7px;
+        right: 25px;
+    }
+
+    .action .profile {
+        position: relative;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .action .profile img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ffcc00;
+    }
+
+    .action .menu {
+        position: absolute;
+        top: 120px;
+        right: -10px;
+        padding: 10px 20px;
+        background: #000;
+        /* Background color updated to black */
+        width: 200px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, .1);
+        border-radius: 15px;
+        transition: .5s;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .action .menu.active {
+        top: 80px;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .action .menu::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        right: 28px;
+        width: 20px;
+        height: 20px;
+        background: #000;
+        /* Arrow color updated to black */
+        transform: rotate(45deg);
+    }
+
+    .action .menu h2 {
+        width: 100%;
+        text-align: center;
+        font-size: 24px;
+        padding: 20px 0;
+        font-weight: 500;
+        color: #fff;
+        /* Text color updated to white */
+        line-height: 1.2em;
+    }
+
+    .action .menu h2 span {
+        font-size: 14px;
+        color: #cecece;
+        font-weight: 400;
+    }
+
+    .action .menu ul li {
+        display: block;
+        list-style: none;
+        padding: 10px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        /* Border color updated to a light white */
+        display: flex;
+        align-items: center;
+    }
+
+    .action .menu ul li i {
+        font-size: 16px;
+        width: 32px;
+        margin-right: 10px;
+        opacity: .6;
+        transition: .5s;
+    }
+
+    .action .menu ul li:hover i {
+        opacity: 1;
+    }
+
+    .action .menu ul li a {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        /* Link color updated to white */
+        font-weight: 500;
+        transition: .5s;
+    }
+
+    .action .menu ul li:hover a {
+        color: #ffcc00;
+        /* Hover color updated to yellow */
+    }
+</style>
+<script>
+    const tap = document.querySelector('.profile');
+    tap.addEventListener('click', function () {
+        const toggleMenu = document.querySelector('.menu');
+        toggleMenu.classList.toggle('active');
+    });
+</script>
