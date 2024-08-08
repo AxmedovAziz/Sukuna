@@ -8,7 +8,11 @@ class ReservationForm(forms.ModelForm):
         fields = ["name", "phone_number", "email", "guests", "date", "time"]
         widgets = {
             "name": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Name"}
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Name",
+                    "readonly": "readonly",
+                }
             ),
             "phone_number": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Phone Number"}

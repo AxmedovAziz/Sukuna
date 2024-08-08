@@ -9,6 +9,7 @@
             <li><a href="{% url 'menu_page' %}">Menu</a></li>
             <li><a href="{% url 'blog' %}">Blog</a></li>
             {% if request.user.is_authenticated %}
+            <li><a href="{% url 'reservation' %}">Reservation</a></li>
             <li class="user-dropdown">
                 <div class="user-info">
                     <img src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{% else %}{% static 'default-profile.png' %}{% endif %}"
@@ -36,10 +37,10 @@
         <li><a href="{% url 'menu_page' %}">Menu</a></li>
         <li><a href="{% url 'blog' %}">Blog</a></li>
         {% if request.user.is_authenticated %}
+        <li><a href="{% url 'reservation' %}">Reservation</a></li>
         <li class="user-info">
             <img src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{% else %}{% static 'default-profile.png' %}{% endif %}"
                 alt="Profile Image" class="profile-thumbnail">
-            <!-- <span>{{ request.user.username }}</span> -->
             <button class="dropdown-btn" onclick="toggleDropdownMobile()">&#x25BC;</button>
         </li>
         <div class="dropdown-content-mobile" id="dropdown-content-mobile">
@@ -179,6 +180,7 @@
 
     .menu-icon {
         display: none;
+        margin-right: 95px;
         font-size: 2em;
         cursor: pointer;
     }
@@ -221,7 +223,7 @@
         }
 
         .mobile-nav {
-            display: block;
+            display: none;
         }
 
         .mobile-nav .user-info {

@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 python-decouple = "*"
+psycopg = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

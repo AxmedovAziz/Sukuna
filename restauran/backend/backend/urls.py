@@ -24,3 +24,9 @@ SIGNUP_REDIRECT_URL = "landing_page"
 SIGNUP_URL = "account_signup"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_EMAIL_VERIFICATION = "none"
+# "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "railway",
+#         "USER": "postgres",
+#         "PASSWORD": "XFlaeDLoQeEzYwoPJgRfzEBKAWwSYnaY",
+#         "HOST": "postgres.railway.internal",
+#         "PORT": "5432",

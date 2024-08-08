@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ReservationForm, UpdateReservation
 from .models import Reservation
+from django.contrib.auth.decorators import permission_required
 
 
 def reservation_view(request):
@@ -21,6 +22,7 @@ def blog(request):
     return render(request, "blog.html", context)
 
 
+@permission_required("reservation.edit_mymodel")
 def update_reservation_view(request, pk: int):
     reservation = get_object_or_404(Reservation, id=pk)
     if request.method == "POST":
@@ -35,6 +37,7 @@ def update_reservation_view(request, pk: int):
     return render(request, "update_reservation.html", context)
 
 
+@permission_required("reservation.delete_mymodel")
 def delete_reservation_view(request, pk: int):
     reservation = get_object_or_404(Reservation, id=pk)
     if request.method == "POST":

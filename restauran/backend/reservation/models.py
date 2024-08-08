@@ -11,3 +11,10 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.date} at {self.time}"
+
+    class Meta:
+        permissions = [
+            ("view_mymodel", "Can view my model"),
+            ("edit_mymodel", "Can edit my model"),
+            ("delete_mymodel", "Can delete my model"),
+        ]
