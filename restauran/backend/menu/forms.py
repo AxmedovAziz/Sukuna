@@ -5,7 +5,12 @@ from .models import Menu
 class MenuForm(forms.ModelForm):
     class Meta:
         model = Menu
-        fields = ["name", "image", "price", "ingredients", "time"]
+        fields = [
+            "name",
+            "image",
+            "price",
+            "ingredients",
+        ]
         widgets = {
             "name": forms.TextInput(
                 attrs={
@@ -20,9 +25,9 @@ class MenuForm(forms.ModelForm):
                     "placeholder": "Enter the price of food",
                 }
             ),
-            "time": forms.TimeInput(
-                attrs={"class": "form-control", "placeholder": "Time", "type": "time"}
-            ),
+            # "time": forms.TimeInput(
+            #     attrs={"class": "form-control", "placeholder": "Time", "type": "time"}
+            # ),
             "image": forms.FileInput(
                 attrs={
                     "class": "form-control",

@@ -10,7 +10,7 @@ class Reservation(models.Model):
     time = models.TimeField()
 
     def __str__(self):
-        return f"{self.name} - {self.date} at {self.time}"
+        return f"{self.name} - {self.date} at {self.time} ({self.id})"
 
     class Meta:
         permissions = [

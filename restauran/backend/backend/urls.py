@@ -6,7 +6,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", landing_page, name="landing_page"),
-    path("about/", about, name="about"),
     path("contact/", contact, name="contact"),
     path("menu_page/", menu_page, name="menu_page"),
     path("reser/", include("reservation.urls")),

@@ -1,241 +1,286 @@
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-<header>
-    <div class="logo"><a href="{% url 'landing_page' %}" style="text-decoration: none; color: white;">QITCHEN</a></div>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'menu_page' %}">Menu</a></li>
-            <li><a href="{% url 'blog' %}">Blog</a></li>
-            {% if request.user.is_authenticated %}
-            <li><a href="{% url 'reservation' %}">Reservation</a></li>
-            <li class="user-dropdown">
-                <div class="user-info">
-                    <img src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{% else %}{% static 'default-profile.png' %}{% endif %}"
-                        alt="Profile Image" class="profile-thumbnail">
-                    <!-- <span>{{ request.user.username }}</span> -->
-                    <button class="dropdown-btn" onclick="toggleDropdown()">&#x25BC;</button>
-                </div>
-                <div class="dropdown-content" id="dropdown-content">
-                    <a href="{% url 'profile' %}">Edit Profile</a>
-                    <a href="{% url 'account_logout' %}">Logout</a>
-                </div>
-            </li>
-            {% else %}
-            <li><a href="{% url 'account_login' %}">Login</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-</header>
-
-<div class="mobile-nav" id="mobile-nav">
-    <ul>
-        <li><a href="{% url 'contact' %}">Contact</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'menu_page' %}">Menu</a></li>
-        <li><a href="{% url 'blog' %}">Blog</a></li>
-        {% if request.user.is_authenticated %}
-        <li><a href="{% url 'reservation' %}">Reservation</a></li>
-        <li class="user-info">
-            <img src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{% else %}{% static 'default-profile.png' %}{% endif %}"
-                alt="Profile Image" class="profile-thumbnail">
-            <button class="dropdown-btn" onclick="toggleDropdownMobile()">&#x25BC;</button>
-        </li>
-        <div class="dropdown-content-mobile" id="dropdown-content-mobile">
-            <a href="{% url 'profile' %}">Edit Profile</a>
-            <a href="{% url 'account_logout' %}">Logout</a>
-        </div>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">Login</a></li>
-        {% endif %}
-    </ul>
-</div>
-
-
-<script>
-    function toggleMenu() {
-        var nav = document.getElementById("mobile-nav");
-        if (nav.style.display === "block") {
-            nav.style.display = "none";
-        } else {
-            nav.style.display = "block";
-        }
-    }
-
-    function toggleDropdown() {
-        var dropdown = document.getElementById("dropdown-content");
-        if (dropdown.style.display === "block") {
-            dropdown.style.display = "none";
-        } else {
-            dropdown.style.display = "block";
-        }
-    }
-
-    function toggleDropdownMobile() {
-        var dropdown = document.getElementById("dropdown-content-mobile");
-        if (dropdown.style.display === "block") {
-            dropdown.style.display = "none";
-        } else {
-            dropdown.style.display = "block";
-        }
-    }
-
-    document.addEventListener("click", function (event) {
-        var dropdown = document.getElementById("dropdown-content");
-        if (!event.target.matches('.dropdown-btn') && !event.target.closest('.user-dropdown')) {
-            if (dropdown.style.display === "block") {
-                dropdown.style.display = "none";
-            }
-        }
-    });
-</script>
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        background-color: rgba(0, 0, 0, 0.7);
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 10;
-    }
-
-    .logo {
-        font-size: 1.5em;
-        font-weight: bold;
-    }
-
-    nav ul {
-        list-style: none;
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-
-    nav a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 1em;
-    }
-
-    .user-dropdown {
-        position: relative;
-    }
-
-    .user-info {
-        opacity: 0%;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .profile-thumbnail {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #ffcc00;
-    }
-
-    .dropdown-btn {
-        background: none;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        font-size: 1em;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.9);
-        min-width: 150px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-        border-radius: 5px;
-    }
-
-    .dropdown-content a {
-        color: white;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-    .dropdown-content a:hover {
-        background-color: #ffcc00;
-        color: black;
-    }
-
-    .menu-icon {
-        display: none;
-        margin-right: 95px;
-        font-size: 2em;
-        cursor: pointer;
-    }
-
-    .mobile-nav {
-        display: none;
-        position: fixed;
-        top: 60px;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9;
-    }
-
-    .mobile-nav ul {
-        list-style: none;
-        padding: 20px;
-    }
-
-    .mobile-nav ul li {
-        padding: 10px 0;
-    }
-
-    .mobile-nav a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 1em;
-    }
-
-    .dropdown-content-mobile {
-        display: none;
-    }
-
-    @media (max-width: 768px) {
-        .menu-icon {
-            display: block;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Footer</title>
+    <style>
+        :root {
+            --color-black: rgba(0, 0, 0, 0.7);
+            --color-white: #fff;
+            --color-darken: rgba(0, 0, 0, 0.9);
+            --color-teal-100: rgba(255, 255, 255, 0.9);
+            --shadow-small: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
-        nav ul {
-            display: none;
+        *,
+        *::before,
+        *::after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
-        .mobile-nav {
-            display: none;
+        html {
+            font-size: 100%;
+            box-sizing: inherit;
+            scroll-behavior: smooth;
         }
 
-        .mobile-nav .user-info {
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        a,
+        button {
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: none;
+            text-decoration: none;
+        }
+
+        .footer-container {
+            max-width: 75rem;
+            height: auto;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        .brand {
+            font-family: inherit;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--color-white);
+            text-transform: uppercase;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: 10;
+            background: var(--color-black);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 4rem;
+            margin: 0 auto;
+        }
+
+        .footer-menus {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            display: grid;
+            align-content: center;
+            width: 100%;
+            height: 3.5rem;
+            padding: 0 1rem;
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+            background: var(--color-black);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .footer-menu-list {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 0;
+            justify-content: space-around;
         }
 
-        .mobile-nav .profile-thumbnail {
-            width: 30px;
-            height: 30px;
+        .footer-menu-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            outline: none;
+            color: red;
         }
-    }
-</style>
+
+        .footer-menu-link.is-active {
+            position: relative;
+            color: red;
+            transition: all 0.35s ease;
+        }
+
+        .footer-menu-link.is-active::before {
+            position: absolute;
+            content: "";
+            left: 0;
+            bottom: 0;
+            width: 2rem;
+            height: 2px;
+            border: none;
+            outline: none;
+            color: red;
+            background: var(--color-white);
+        }
+
+        .footer-menu-link:hover {
+            color: red;
+            transition: all 0.35s ease;
+        }
+
+        .footer-menu-icon {
+            font-size: 1.35rem;
+            line-height: 1;
+            color: var(--color-white);
+        }
+
+        .footer-menu-name {
+            display: none;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.25;
+            visibility: hidden;
+            text-transform: capitalize;
+            color: var(--color-white);
+        }
+
+        @media only screen and (min-width: 360px) {
+            .footer-menu-name {
+                display: block;
+                visibility: visible;
+            }
+        }
+
+        @media only screen and (min-width: 576px) {
+            .footer-menu-list {
+                justify-content: center;
+                column-gap: 3rem;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            .header {
+                background: var(--color-black);
+                box-shadow: var(--shadow-medium);
+                transition: all 0.35s ease-in-out;
+            }
+
+            .footer-menus {
+                position: relative;
+                top: 0;
+                right: 0;
+                width: auto;
+                height: auto;
+                background: none;
+                box-shadow: none;
+            }
+
+            .footer-menu-link.is-active::before {
+                position: absolute;
+                content: "";
+                left: 0;
+                bottom: 0;
+                width: 2rem;
+                height: 2px;
+                border: none;
+                outline: none;
+                background: var(--color-white);
+            }
+
+            .footer-menu-link:hover {
+                color: red;
+                transition: all 0.35s ease;
+            }
+
+            .footer-menu-icon {
+                display: none;
+                visibility: hidden;
+            }
+
+            .footer-menu-name {
+                font-size: 1rem;
+                font-weight: 500;
+                line-height: 1.5;
+                margin-bottom: 0.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header" id="header">
+        <nav class="navbar footer-container">
+            <a href="{% url 'landing_page' %}" style="text-decoration: none; color: white;" class="brand">Brand</a>
+            <div class="footer-menus" id="menu">
+                <ul class="footer-menu-list">
+                    <li class="footer-menu-item">
+                        <a href="{% url 'contact' %}" class="footer-menu-link">
+                            <i class="footer-menu-icon ion-md-home"></i>
+                            <span class="footer-menu-name">Contact</span>
+                        </a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="{% url 'menu_page' %}" class="footer-menu-link">
+                            <i class="footer-menu-icon ion-md-search"></i>
+                            <span class="footer-menu-name">Menu</span>
+                        </a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a class="footer-menu-link" href="{% url 'blog' %}">
+                            <i class="footer-menu-icon ion-md-cart"></i>
+                            <span class="footer-menu-name">Blog</span>
+                        </a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="footer-menu-item">
+                        <a class="footer-menu-link" href="{% url 'reservation' %}">
+                            <i class="footer-menu-icon ion-md-cart"></i>
+                            <span class="footer-menu-name">Reservation</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="footer-menu-item">
+                        <a href="#" class="footer-menu-link" href="{% url 'account_login' %}">
+                            <i class="footer-menu-icon ion-md-cart"></i>
+                            <span class="footer-menu-name">Login</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <script>
+        const menuLinks = document.querySelectorAll(".footer-menu-link");
+
+        menuLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                menuLinks.forEach((link) => {
+                    link.classList.remove("is-active");
+                });
+                link.classList.add("is-active");
+            });
+        });
+    </script>
+</body>
+
+</html>

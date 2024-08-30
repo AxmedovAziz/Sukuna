@@ -7,6 +7,12 @@
 
 {% block css %}
 <style>
+    * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+
     body {
         margin: 0;
         padding: 0;
@@ -67,7 +73,6 @@
 <div class="container">
     <div class="menu">
         <a class="links" href="{% url 'menu_page' %}">MENU</a>
-        <a class="links" href="{% url 'about' %}">ABOUT</a>
         <a class="links" href="{% url 'contact' %}">CONTACT</a>
         <a class="links" href="{% url 'blog' %}">BLOG</a>
         {% if request.user.is_authenticated %}

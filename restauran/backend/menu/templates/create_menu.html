@@ -15,7 +15,6 @@
 
     body {
         height: 100vh;
-        /* Ensure body takes full viewport height */
         background-blend-mode: darken;
         background-image: url("{% static 'images/background_weppage/thumb-1920-2499.jpg' %}");
         background-size: cover;
@@ -26,6 +25,9 @@
         line-height: 1.6;
         overflow: hidden;
         /* Prevent scrolling */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     main {
@@ -33,23 +35,23 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        /* Center vertically */
         height: 100%;
-        /* Use full viewport height */
         padding: 20px;
         overflow: auto;
         /* Allow internal scrolling if necessary */
+        width: 100%;
     }
 
     .form-container {
         width: 100%;
-        max-width: 600px;
+        max-width: 450px;
         padding: 20px;
         background: rgba(0, 0, 0, 0.8);
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         border-radius: 10px;
         overflow: hidden;
         /* Hide overflow within container */
+        margin: auto;
     }
 
     form {
@@ -101,6 +103,10 @@
         height: auto;
         margin-top: 10px;
         border-radius: 5px;
+        display: block;
+        /* Ensure image is displayed as a block element */
+        margin-left: auto;
+        margin-right: auto;
     }
 
     input[type="submit"] {
@@ -158,6 +164,7 @@
     }
 </style>
 
+
 {% endblock %}
 
 {% block content %}
@@ -173,9 +180,9 @@
                 Choose Image
                 <input type="file" id="id_image" name="image" onchange="previewImage(this);" accept="image/*">
             </label>
-            <img id="preview" class="preview-image" src="#" alt="Preview Image" style="display: none;">
             <button type="submit">Create Menu</button>
         </form>
+        <img id="preview" class="preview-image" src="#" alt="Preview Image" style="display: none;">
     </div>
 </main>
 

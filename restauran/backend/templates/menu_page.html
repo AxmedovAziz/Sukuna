@@ -4,6 +4,7 @@
 
 {% block css %}
 <style>
+    /* Global styles */
     * {
         transition: ease-in 0.2s;
         box-sizing: border-box;
@@ -27,6 +28,7 @@
         overflow: hidden;
     }
 
+    /* Left section styling */
     .left-section {
         background: url('https://images2.alphacoders.com/133/thumb-1920-1335141.png') center/cover;
         width: 40%;
@@ -41,6 +43,7 @@
         text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
+    /* Right section styling */
     .right-section {
         background-color: #111;
         width: 60%;
@@ -63,13 +66,13 @@
         text-align: center;
     }
 
-    .menu-item {
+    .menu-items {
         display: flex;
         align-items: center;
         margin-bottom: 20px;
     }
 
-    .menu-item img {
+    .menu-items img {
         width: 80px;
         height: 80px;
         object-fit: cover;
@@ -78,7 +81,7 @@
         transition: transform 0.3s, object-position 0.3s;
     }
 
-    .menu-item img:hover {
+    .menu-items img:hover {
         transform: scale(1.1);
         object-position: center top;
     }
@@ -87,12 +90,12 @@
         flex: 1;
     }
 
-    .menu-item h3 {
+    .menu-items h3 {
         margin: 0;
         font-size: 1.2em;
     }
 
-    .menu-item p {
+    .menu-items p {
         margin: 5px 0;
         font-size: 0.9em;
         color: #ccc;
@@ -163,6 +166,7 @@
         border: none;
     }
 
+    /* Mobile menu styles */
     @media (max-width: 1200px) {
         .container {
             flex-direction: column;
@@ -179,16 +183,16 @@
     }
 
     @media (max-width: 768px) {
-        .menu-item img {
+        .menu-items img {
             width: 60px;
             height: 60px;
         }
 
-        .menu-item h3 {
+        .menu-items h3 {
             font-size: 1em;
         }
 
-        .menu-item p {
+        .menu-items p {
             font-size: 0.8em;
         }
 
@@ -198,23 +202,23 @@
     }
 
     @media (max-width: 480px) {
-        .menu-item {
+        .menu-items {
             flex-direction: column;
             align-items: flex-start;
         }
 
-        .menu-item img {
+        .menu-items img {
             width: 100%;
             height: auto;
             margin-bottom: 10px;
         }
 
-        .menu-item h3,
+        .menu-items h3,
         .price {
             font-size: 1.2em;
         }
 
-        .menu-item p {
+        .menu-items p {
             font-size: 0.9em;
         }
 
@@ -223,7 +227,104 @@
             margin: 5px 0;
         }
     }
+
+    /* Mobile menu specific styles */
+    .menu-icon {
+        display: none;
+        margin-right: 95px;
+        font-size: 2em;
+        cursor: pointer;
+    }
+
+    .mobile-nav {
+        display: none;
+        position: fixed;
+        top: 60px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9;
+    }
+
+    .mobile-nav ul {
+        list-style: none;
+        padding: 20px;
+    }
+
+    .mobile-nav ul li {
+        padding: 10px 0;
+    }
+
+    .mobile-nav a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1em;
+    }
+
+    .dropdown-content-mobile {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .menu-icon {
+            display: block;
+        }
+
+        nav ul {
+            display: none;
+        }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        .mobile-nav .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .mobile-nav .profile-thumbnail {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    /* Styling for active menu link */
+    .menu-link.is-active::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: 0;
+        width: 2rem;
+        height: 2px;
+        border: none;
+        outline: none;
+        background: var(--color-teal-800);
+    }
+
+    .menu-link:hover {
+        color: var(--color-teal-800);
+        transition: all 0.35s ease;
+    }
+
+    .menu-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        outline: none;
+        color: var(--color-black);
+    }
+
+    .menu-link.is-active {
+        position: relative;
+        color: var(--color-teal-800);
+        transition: all 0.35s ease;
+    }
 </style>
+
 {% endblock %}
 
 {% block content %}

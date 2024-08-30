@@ -13,21 +13,9 @@ class Menu(models.Model):
     image = models.ImageField(upload_to="menu_images/")
     price = models.DecimalField(max_digits=10, decimal_places=2)
     ingredients = models.TextField()
-    time = models.TimeField(default=get_current_time)
 
     def __str__(self):
-        return self.name
-
-    def __str__(self):
-        return self.name
-
-    def like(self):
-        self.likes += 1
-        self.save()
-
-    def dislike(self):
-        self.dislikes += 1
-        self.save()
+        return f"{self.name} ({self.id})"
 
     @staticmethod
     def with_meat():

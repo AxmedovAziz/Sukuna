@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.github",
+    "rest_framework",
 ]
 ALLOWED_HOSTS = ["192.168.1.102", "localhost", "127.0.0.1"]
 
