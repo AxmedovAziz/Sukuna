@@ -19,7 +19,24 @@
     overflow: hidden;
   }
 
-  main {
+  input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+
+  input {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+  }
+
+  textarea {
+    padding: 4px 5px;
+    width: 100%;
+  }
+
+  .main-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,7 +83,7 @@
     margin-bottom: 10px;
   }
 
-  .file-input-container {
+  .file-input-overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -81,7 +98,7 @@
     gap: 10px;
   }
 
-  .file-input-container button {
+  .file-input-overlay button {
     background-color: #ffcc00;
     color: #000;
     border: none;
@@ -91,11 +108,11 @@
     transition: background-color 0.3s;
   }
 
-  .file-input-container button:hover {
+  .file-input-overlay button:hover {
     background-color: #e6b800;
   }
 
-  input[type="file"] {
+  .file-input-hidden {
     display: none;
   }
 
@@ -110,20 +127,20 @@
     font-weight: bold;
   }
 
-  input,
-  button {
+  .input-field,
+  .submit-button {
     padding: 10px;
     border: none;
     border-radius: 5px;
   }
 
-  input {
+  .input-field {
     background-color: #333;
     color: #fff;
     width: 100%;
   }
 
-  button {
+  .submit-button {
     background-color: #ffcc00;
     color: #000;
     font-weight: bold;
@@ -133,26 +150,26 @@
     transition: background-color 0.3s, transform 0.3s;
   }
 
-  textarea {
+  .textarea-field {
     padding: 4px 5px;
     width: 100%;
   }
 
-  form a {
+  .form-link {
     color: #ffcc00;
     text-decoration: none;
   }
 
-  form a:hover {
+  .form-link:hover {
     text-decoration: underline;
   }
 
-  button:hover {
+  .submit-button:hover {
     background-color: #e6b800;
     transform: scale(1.05);
   }
 
-  button:active {
+  .submit-button:active {
     transform: scale(0.95);
   }
 
@@ -187,7 +204,7 @@
 </style>
 {% endblock %}
 {% block content %}
-<main>
+<div class="main-container">
   <div class="profile-section">
     <div class="profile-container">
       <h2>Profile</h2>
@@ -195,11 +212,11 @@
         {% csrf_token %}
         <div class="profile-image-container">
           <img id="profile-image-preview" src="{{ p_form.instance.image.url }}" alt="Profile Image">
-          <div class="file-input-container" id="file-input-container">
+          <div class="file-input-overlay" id="file-input-overlay">
             <button type="button" id="choose-file-button">Choose from Files</button>
             <button type="button" id="remove-photo-button">Remove Photo</button>
           </div>
-          <input id="file-upload" type="file" name="image" accept="image/*">
+          <input id="file-upload" class="file-input-hidden" type="file" name="image" accept="image/*">
         </div>
         <p>{{ current_user }}</p>
         <div class="form-group">
@@ -208,30 +225,30 @@
         <div class="form-group">
           {{ p_form.information }}
         </div>
-        <button type="submit">Update Profile</button>
-        <a href="{% url 'account_change_password' %}">Change Password</a> |
-        <a href="{% url 'account_email' %}">Change Email</a>
+        <button class="submit-button" type="submit">Update Profile</button>
+        <a class="form-link" href="{% url 'account_change_password' %}">Change Password</a> |
+        <a class="form-link" href="{% url 'account_email' %}">Change Email</a>
       </form>
     </div>
   </div>
-</main>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.querySelector('#file-upload');
     const imagePreview = document.getElementById('profile-image-preview');
-    const fileInputContainer = document.getElementById('file-input-container');
+    const fileInputOverlay = document.getElementById('file-input-overlay');
     const chooseFileButton = document.getElementById('choose-file-button');
     const removePhotoButton = document.getElementById('remove-photo-button');
 
     document.querySelector('.profile-image-container').addEventListener('click', function (event) {
       event.stopPropagation();
-      fileInputContainer.style.display = 'flex';
+      fileInputOverlay.style.display = 'flex';
     });
 
     document.addEventListener('click', function (event) {
-      if (!fileInputContainer.contains(event.target) && !event.target.matches('.profile-image-container img')) {
-        fileInputContainer.style.display = 'none';
+      if (!fileInputOverlay.contains(event.target) && !event.target.matches('.profile-image-container img')) {
+        fileInputOverlay.style.display = 'none';
       }
     });
 
@@ -240,7 +257,7 @@
     });
 
     removePhotoButton.addEventListener('click', function () {
-      fileInputContainer.style.display = 'none';
+      fileInputOverlay.style.display = 'none';
       imagePreview.src = "{% static 'default-profile.png' %}";
       fileInput.value = '';
     });
@@ -254,7 +271,7 @@
         };
         reader.readAsDataURL(file);
       }
-      fileInputContainer.style.display = 'none';
+      fileInputOverlay.style.display = 'none';
     });
   });
 </script>

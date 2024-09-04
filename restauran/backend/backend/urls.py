@@ -1,15 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import landing_page, about, contact, menu_page, GoogleLoginView
+from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path("", landing_page, name="landing_page"),
     path("contact/", contact, name="contact"),
-    path("menu_page/", menu_page, name="menu_page"),
     path("reser/", include("reservation.urls")),
-    path("menu-cr/", include("menu.urls")),
+    path("menu/", include("menu.urls"), name="menu"),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("create_profile/", include("user.urls")),

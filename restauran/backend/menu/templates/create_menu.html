@@ -82,7 +82,7 @@
     }
 
     .custom-file-upload,
-    button {
+    .create-btn {
         background-color: #ffcc00;
         color: #000;
         border: none;
@@ -94,7 +94,7 @@
     }
 
     .custom-file-upload:hover,
-    button:hover {
+    .create-btn:hover {
         background-color: #e6b800;
     }
 
@@ -180,7 +180,7 @@
                 Choose Image
                 <input type="file" id="id_image" name="image" onchange="previewImage(this);" accept="image/*">
             </label>
-            <button type="submit">Create Menu</button>
+            <button class='create-btn' type="submit">Create Menu</button>
         </form>
         <img id="preview" class="preview-image" src="#" alt="Preview Image" style="display: none;">
     </div>

@@ -12,6 +12,20 @@ from .serializers import MenuSerializer
 from rest_framework import generics
 
 
+def menu_page(request):
+    menues = Menu.objects.all()
+    price_less_than = Menu.price_less_than(50)
+    with_meat = Menu.with_meat()
+
+    context = {
+        "menues": menues,
+        "price_less_than": price_less_than,
+        "with_meat": with_meat,
+        "wishlist": request.session.get("favorites", []),
+    }
+    return render(request, "menu_page.html", context)
+
+
 class MenuListCreateAPIView(generics.ListCreateAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
@@ -28,8 +42,10 @@ def create_menu_view(request):
     if request.method == "POST":
         form = MenuForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect("menu_page")
+            menu = form.save(commit=False)
+            menu.owner = request.user
+            menu.save()
+            return redirect("menu")
     else:
         form = MenuForm()
 
@@ -45,6 +61,7 @@ def detail_menu(request, pk=None, *args, **kwargs):
             "name": menu.name,
             "ingredients": menu.ingredients,
             "price": menu.price,
+            "image": menu.image.url,
             # Add other fields as necessary
         }
         context = {"data": data}
