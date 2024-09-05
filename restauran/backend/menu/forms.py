@@ -5,12 +5,7 @@ from .models import Menu
 class MenuForm(forms.ModelForm):
     class Meta:
         model = Menu
-        fields = [
-            "name",
-            "image",
-            "price",
-            "ingredients",
-        ]
+        fields = ["name", "image", "price", "ingredients", "id"]
         widgets = {
             "name": forms.TextInput(
                 attrs={

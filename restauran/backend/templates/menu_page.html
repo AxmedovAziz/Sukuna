@@ -67,9 +67,24 @@
     }
 
     .menu-items {
+        padding: 0px 3px;
+        border-radius: 7px;
         display: flex;
         align-items: center;
         margin-bottom: 20px;
+    }
+
+    a.sender {
+        color: #ffcc00;
+        /* Color for the <a> tag */
+        text-decoration: none;
+    }
+
+    /* Ensure that nested elements inside the <a> tag don't inherit the link color */
+    a.sender div,
+    a.sender span {
+        color: inherit;
+        /* This keeps their original color */
     }
 
     .menu-items img {
