@@ -166,15 +166,19 @@
                 <p><strong>Guests:</strong> {{ reservation.guests }}</p>
                 <p><strong>Date:</strong> {{ reservation.date }}</p>
                 <p><strong>Time:</strong> {{ reservation.time }}</p>
+                <!-- <p><strong>Table Number:</strong> {{ request.user }}</p> -->
             </div>
+            {% if request.user.username == reservation.name %}
             <div class="button-group">
                 <a class="update-button" href="{% url 'update_reservation_view' reservation.id %}">update</a>
 
                 <a class="delete-button" href="{% url 'delete_reservation' reservation.id %}">delete</a>
 
             </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
 </main>
+
 {% endblock %}

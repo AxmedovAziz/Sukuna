@@ -8,6 +8,11 @@ python-decouple = "*"
 psycopg = "*"
 psycopg2-binary = "*"
 djangorestframework = "*"
+django-allauth = "*"
+requests = "*"
+pyjwt = "*"
+cryptography = "*"
+pillow = "*"
 
 [dev-packages]
 

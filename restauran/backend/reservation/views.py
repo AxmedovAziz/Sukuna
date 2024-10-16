@@ -22,7 +22,7 @@ def blog(request):
     return render(request, "blog.html", context)
 
 
-@permission_required("reservation.edit_mymodel")
+# @permission_required("reservation.edit_mymodel")
 def update_reservation_view(request, pk: int):
     reservation = get_object_or_404(Reservation, id=pk)
     if request.method == "POST":
@@ -37,10 +37,11 @@ def update_reservation_view(request, pk: int):
     return render(request, "update_reservation.html", context)
 
 
-@permission_required("reservation.delete_mymodel")
+# @permission_required("reservation.delete_mymodel")
 def delete_reservation_view(request, pk: int):
     reservation = get_object_or_404(Reservation, id=pk)
     if request.method == "POST":
-        reservation.delete()
-        return redirect("blog")
+        if reservation.name == request.user.username:
+            reservation.delete()
+            return redirect("blog")
     return render(request, "confirm_delete.html", {"reservation": reservation})
